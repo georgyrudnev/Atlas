@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Atlas.ViewModels"
+             x:Class="Atlas.Views.BooksPage"
+             Title="Books">
+
+    <ContentPage.BindingContext>
+        <viewmodel:BooksViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <CollectionView ItemsSource="{Binding Books}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5">
+                        <Grid ColumnDefinitions="*,Auto"
+                              RowDefinitions="Auto,Auto,Auto">
+
+                            <Label Text="{Binding Title}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   Grid.Column="0"
+                                   Grid.Row="0"/>
+
+                            <Label Text="{Binding Author}"
+                                   FontSize="14"
+                                   Grid.Column="0"
+                                   Grid.Row="1"/>
+
+                            <ProgressBar Progress="{Binding ProgressPercentage}"
+                                         WidthRequest="200"
+                                         Grid.Column="1"
+                                         Grid.RowSpan="3"/>
+
+                            <Button Text="Delete"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BooksViewModel}}, Path=DeleteBookCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Grid.Column="1"
+                                    Grid.Row="2"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Add Book"
+                Command="{Binding AddBookCommand}"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                Margin="20"
+                WidthRequest="120"/>
+    </Grid>
+</ContentPage>
