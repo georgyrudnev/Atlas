@@ -9,7 +9,7 @@
         <viewmodel:BooksViewModel />
     </ContentPage.BindingContext>
 
-    <Grid>
+    <VerticalStackLayout>
         <CollectionView ItemsSource="{Binding Books}"
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
@@ -46,10 +46,6 @@
         </CollectionView>
 
         <Button Text="Add Book"
-                Command="{Binding AddBookCommand}"
-                VerticalOptions="End"
-                HorizontalOptions="End"
-                Margin="20"
-                WidthRequest="120"/>
-    </Grid>
+                Command="{Binding AddBookCommand}"/>
+    </VerticalStackLayout>
 </ContentPage>

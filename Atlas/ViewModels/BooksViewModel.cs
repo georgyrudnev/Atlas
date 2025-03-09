@@ -20,6 +20,18 @@ namespace Atlas.ViewModels
         {
             _dataService = dataService;
             LoadBooks();
+
+            // Add test data if database is empty
+            if (!Books.Any())
+            {
+                _dataService.SaveBook(new Book
+                {
+                    Title = "MAUI in Action",
+                    Author = "Matt",
+                    CurrentPage = 150,
+                    TotalPages = 300
+                });
+            }
         }
 
         public ObservableCollection<Book> Books { get; } = new();
